@@ -18,7 +18,7 @@ package org.jboss.as.cli.impl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CancellationException;
@@ -143,7 +143,7 @@ public class BootScriptInvokerTestCase {
             }
         }
 
-        private Set<String> seen = new HashSet<>();
+        private Set<String> seen = new LinkedHashSet<>();
         private ModelNode mn;
 
         private TestClient() {
@@ -211,10 +211,10 @@ public class BootScriptInvokerTestCase {
         WildFlySecurityManager.setPropertyPrivileged("org.wildfly.internal.cli.boot.hook.script.properties", propertiesFile.toString());
         BootScriptInvoker invoker = new BootScriptInvoker();
 
-        Set<String> operations = new HashSet<>();
+        Set<String> operations = new LinkedHashSet<>();
         operations.add("op1");
         operations.add("op2");
-        Set<String> echos = new HashSet<>();
+        Set<String> echos = new LinkedHashSet<>();
         echos.add("echo TestWarning > ${" + propWarning + "}");
         echos.add("echo TestError > ${" + propError + "}");
         echos.add("echo TestFoo >> ${" + propFoo + "}");
@@ -262,7 +262,7 @@ public class BootScriptInvokerTestCase {
 
     @Test
     public void testFailure() throws Exception {
-        Set<String> unavailable = new HashSet<>();
+        Set<String> unavailable = new LinkedHashSet<>();
         unavailable.add("connect");
         unavailable.add("clear");
         unavailable.add("reload");
