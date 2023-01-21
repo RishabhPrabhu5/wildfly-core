@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.LinkedHashSet;
 import org.aesh.command.activator.OptionActivator;
 import org.aesh.command.impl.internal.ProcessedOption;
 import org.wildfly.core.cli.command.aesh.activator.DependOptionActivator;
@@ -181,11 +181,6 @@ class SynopsisGenerator {
             }
             synopsisBuilder.append(" |");
             // Keep the set of all conflicts, they will be removed from all conflicts, being handled at this level.
-            //Flaky test occurred in HelpSupportTestCase.testStandalone.
-            //The test expects the arguments to be in a specific order, but hashSet does not maintain order.
-            //So replaced HashSet with LinkedHashSets
-            //Refer Nondex tool: https://github.com/TestingResearchIllinois/NonDex
-
             Set<SynopsisOption> conflicts = new LinkedHashSet<>(currentOption.conflictWith);
             Set<SynopsisOption> conflicts2 = new LinkedHashSet<>(currentOption.conflictWith);
             // Conflicts can have dependencies that must be added prior to them
